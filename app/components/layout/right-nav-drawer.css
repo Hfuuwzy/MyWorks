@@ -1,0 +1,185 @@
+.drawer-layer {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+}
+
+.drawer-overlay {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: var(--paper);
+  cursor: pointer;
+  opacity: 0.72;
+}
+
+.right-nav-drawer {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  display: flex;
+  inline-size: var(--drawer-width);
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 56px calc(var(--rail-width) + 40px) 32px 48px;
+  border-inline-start: 1px solid var(--rule);
+  background-color: var(--nav-paper);
+  background-image: var(--nav-paper-texture);
+  color: var(--ink);
+}
+
+.drawer-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-block-end: 32px;
+  border-block-end: 1px solid var(--rule);
+}
+
+.drawer-heading__eyebrow,
+.drawer-heading__title {
+  margin: 0;
+}
+
+.drawer-heading__eyebrow {
+  color: var(--vermilion);
+  font-size: 12px;
+  letter-spacing: 0.36em;
+}
+
+.drawer-heading__title {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 28px;
+}
+
+.drawer-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(44px, 1fr));
+  flex: 1;
+  gap: 24px;
+  padding-block: 40px 32px;
+}
+
+.drawer-link {
+  display: flex;
+  min-inline-size: 164px;
+  min-block-size: 44px;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  writing-mode: vertical-rl;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.drawer-link:hover {
+  color: var(--ink);
+  transform: translateY(-4px);
+}
+
+.drawer-link:focus-visible,
+.drawer-close:focus-visible {
+  outline: 3px solid var(--vermilion);
+  outline-offset: 3px;
+}
+
+.drawer-link__stamp {
+  inline-size: 8px;
+  block-size: 8px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: var(--rule);
+}
+
+.drawer-link--active {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.drawer-link--active .drawer-link__stamp {
+  background: var(--vermilion);
+}
+
+.drawer-link__label {
+  font-family: "Noto Serif SC", "Noto Serif JP", "Songti SC", serif;
+  font-size: 17px;
+  letter-spacing: 0.14em;
+}
+
+.drawer-link__english {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+}
+
+.drawer-close {
+  display: inline-flex;
+  min-block-size: 44px;
+  align-self: flex-start;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+}
+
+.drawer-layer-enter-active,
+.drawer-layer-leave-active {
+  transition: opacity 650ms ease;
+}
+
+.drawer-layer-enter-active .right-nav-drawer,
+.drawer-layer-leave-active .right-nav-drawer {
+  transition: transform 650ms ease, opacity 650ms ease;
+}
+
+.drawer-layer-enter-from,
+.drawer-layer-leave-to,
+.drawer-layer-enter-from .right-nav-drawer,
+.drawer-layer-leave-to .right-nav-drawer {
+  opacity: 0;
+}
+
+.drawer-layer-enter-from .right-nav-drawer,
+.drawer-layer-leave-to .right-nav-drawer {
+  transform: translateX(30px);
+}
+
+@media (width < 1024px) {
+  .right-nav-drawer {
+    inline-size: 72vw;
+    padding-inline: 40px calc(var(--rail-width-tablet) + 32px);
+  }
+}
+
+@media (width < 768px) {
+  .right-nav-drawer {
+    inline-size: 100vw;
+    padding: 32px calc(var(--rail-width-mobile) + 24px) 24px 24px;
+  }
+
+  .drawer-heading {
+    padding-block-end: 24px;
+  }
+
+  .drawer-nav {
+    grid-template-columns: repeat(5, minmax(44px, 1fr));
+    gap: 12px;
+    padding-block: 32px 24px;
+  }
+
+  .drawer-link {
+    min-inline-size: 136px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-layer-enter-active,
+  .drawer-layer-leave-active,
+  .drawer-layer-enter-active .right-nav-drawer,
+  .drawer-layer-leave-active .right-nav-drawer,
+  .drawer-link {
+    transition-duration: 1ms;
+  }
+}

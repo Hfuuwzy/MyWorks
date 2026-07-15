@@ -1,0 +1,228 @@
+.home-visual {
+  position: relative;
+  min-block-size: max(100svh, 760px);
+  overflow: hidden;
+  background: var(--paper-warm);
+  color: var(--ink);
+  isolation: isolate;
+}
+
+.home-visual__image {
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+
+.home-visual__mist {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--paper-warm) 0%, var(--paper-warm) 22%, transparent 68%),
+    linear-gradient(180deg, transparent 62%, var(--sakura) 132%);
+  opacity: 0.94;
+}
+
+.home-visual__content {
+  display: flex;
+  inline-size: min(48%, 680px);
+  min-block-size: max(100svh, 760px);
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  padding: 48px clamp(32px, 5vw, 80px);
+}
+
+.home-visual__brand-block {
+  inline-size: fit-content;
+}
+
+.home-visual__brand {
+  margin: 0;
+  font-family: "Noto Serif SC", "Noto Serif JP", "Songti SC", serif;
+  font-size: clamp(56px, 7vw, 104px);
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 0.96;
+  text-shadow: 0 1px var(--paper-warm);
+}
+
+.home-visual__subtitle {
+  margin: 16px 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 1.4vw, 20px);
+  letter-spacing: 0.28em;
+  line-height: 1.75;
+}
+
+.home-visual__latest {
+  display: flex;
+  min-block-size: 44px;
+  align-items: center;
+  gap: 16px;
+  inline-size: fit-content;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: transform 180ms ease-out;
+}
+
+.home-visual__latest-label {
+  padding: 4px 8px;
+  background: var(--sakura);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.home-visual__latest:hover {
+  color: var(--vermilion);
+  transform: translateX(4px);
+}
+
+.home-visual__latest:focus-visible,
+.home-visual__scroll:focus-visible {
+  outline: 3px solid var(--vermilion);
+  outline-offset: 4px;
+}
+
+.home-visual__categories {
+  max-inline-size: 560px;
+}
+
+.home-visual__media {
+  max-inline-size: 400px;
+  padding: 20px 24px;
+  border-block: 1px dotted var(--rule);
+  background: var(--nav-paper);
+}
+
+.home-visual__media-kicker {
+  color: var(--vermilion);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.36em;
+}
+
+.home-visual__media p {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.home-visual__scroll {
+  position: absolute;
+  inset-block-end: 28px;
+  inset-inline-start: 50%;
+  display: flex;
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  transform: translateX(-50%);
+}
+
+.home-visual__scroll svg {
+  inline-size: 20px;
+  block-size: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+@media (width < 1024px) {
+  .home-visual__image {
+    object-position: 58% 38%;
+  }
+
+  .home-visual__content {
+    inline-size: 58%;
+    gap: 24px;
+    padding-inline: 32px;
+  }
+}
+
+@media (width < 768px) {
+  .home-visual {
+    --mobile-hero-safe-area: 75svh;
+
+    min-block-size: max(100svh, 760px);
+  }
+
+  .home-visual__image {
+    object-position: 72% 42%;
+  }
+
+  .home-visual__mist {
+    background: linear-gradient(
+      180deg,
+      transparent 0 var(--mobile-hero-safe-area),
+      var(--paper-warm) calc(var(--mobile-hero-safe-area) + 10svh),
+      var(--paper) 100%
+    );
+    opacity: 0.98;
+  }
+
+  .home-visual__content {
+    inline-size: 100%;
+    min-block-size: max(100svh, 760px);
+    justify-content: flex-start;
+    gap: 16px;
+    padding: var(--mobile-hero-safe-area) 20px 68px;
+  }
+
+  .home-visual__brand {
+    font-size: clamp(48px, 15vw, 68px);
+  }
+
+  .home-visual__subtitle {
+    margin-block-start: 8px;
+    font-size: 16px;
+  }
+
+  .home-visual__categories {
+    max-inline-size: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .home-visual__categories::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-visual__categories :deep(.vertical-category-nav) {
+    inline-size: max-content;
+    flex-wrap: nowrap;
+  }
+
+  .home-visual__media {
+    display: none;
+  }
+
+  .home-visual__scroll {
+    inset-block-end: 12px;
+    inset-inline-start: 20px;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-visual__latest {
+    transition: none;
+  }
+}

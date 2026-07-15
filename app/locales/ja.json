@@ -1,0 +1,27 @@
+{
+  "site": {
+    "title": "MyWorks",
+    "description": "個人ポータルサイト"
+  },
+  "nav": {
+    "home": "ホーム",
+    "blog": "ブログ",
+    "projects": "オープンソース",
+    "movies": "映画のおすすめ",
+    "anime": "アニメのおすすめ",
+    "music": "音楽のおすすめ",
+    "tools": "ツール・リソース",
+    "life": "日常エッセイ",
+    "notes": "技術ノート",
+    "about": "自己紹介"
+  },
+  "home": {
+    "welcome": "私の個人ポータルへようこそ",
+    "subtitle": "技術学習、オープンソースプロジェクト、日常の気づき、おすすめコンテンツをまとめています。",
+    "viewAll": "すべて見る"
+  },
+  "footer": {
+    "copyright": "著作権所有",
+    "builtWith": "Nuxt.js と Tailwind CSS で構築"
+  }
+}

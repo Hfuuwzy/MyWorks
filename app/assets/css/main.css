@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f8f5ed;
+  --paper-warm: #fffaf0;
+  --ink: #2a0c00;
+  --ink-soft: #6f5748;
+  --vermilion: #e85845;
+  --sakura: #efcbd5;
+  --matcha: #dce8c8;
+  --wagashi: #ead8ad;
+  --rule: rgba(42, 12, 0, 0.34);
+  --nav-paper: rgba(250, 248, 242, 0.97);
+  --rail-width: 80px;
+  --rail-width-tablet: 64px;
+  --rail-width-mobile: 56px;
+  --drawer-width: clamp(560px, 48vw, 760px);
+  --paper-texture: url('/images/reference/deaimon/paper-body.jpg');
+  --paper-surface-depth:
+    linear-gradient(color-mix(in srgb, var(--paper) 82%, transparent), color-mix(in srgb, var(--paper) 82%, transparent)),
+    var(--paper-texture);
+  --paper-surface-blend: normal, multiply;
+  --ink-impression: 0 0.35px 0 color-mix(in srgb, var(--ink) 18%, transparent);
+  --section-paper-texture: url('/images/reference/deaimon/paper-section.jpg');
+  --nav-paper-texture: url('/images/reference/deaimon/paper-nav.jpg');
+  --petal-01: url('/images/reference/deaimon/petal-01.png');
+  --petal-03: url('/images/reference/deaimon/petal-03.png');
+  --petal-07: url('/images/reference/deaimon/petal-07.png');
+  --color-bg: var(--paper);
+  --color-surface: var(--paper-warm);
+  --color-text: var(--ink);
+  --color-text-secondary: var(--ink-soft);
+  --color-border: var(--rule);
+}
+
+:root.dark {
+  --paper: #171b22;
+  --paper-warm: #20232b;
+  --ink: #f2eadb;
+  --ink-soft: #c6b9a8;
+  --vermilion: #ef7867;
+  --sakura: #5d404b;
+  --matcha: #3f4c3c;
+  --wagashi: #564b35;
+  --rule: rgba(242, 234, 219, 0.34);
+  --nav-paper: rgba(23, 27, 34, 0.97);
+  --color-bg: var(--paper);
+  --color-surface: var(--paper-warm);
+  --color-text: var(--ink);
+  --color-text-secondary: var(--ink-soft);
+  --color-border: var(--rule);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-bg text-text font-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background-color: var(--sakura);
+    color: var(--vermilion);
+  }
+}
+
+.about-page__role {
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  :where(.about-page, .blog-index) {
+    background-color: var(--paper);
+    background-image: var(--paper-surface-depth);
+    background-blend-mode: var(--paper-surface-blend);
+    text-shadow: var(--ink-impression);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
