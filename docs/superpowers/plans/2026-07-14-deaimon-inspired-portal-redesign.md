@@ -1,5 +1,8 @@
 # Deaimon-Inspired Portal Redesign Implementation Plan
 
+> [!WARNING]
+> **历史归档（2026-07-15）**：本文记录最初的实施计划，其中的 Superpowers 工作流、任务状态、测试数量、文件名和视觉数值不再是现役要求。当前事实以根目录 `README.md`、`DESIGN.md`、`docs/ARCHITECTURE.md`、当前代码和测试为准。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Rebuild the Nuxt portfolio from the current left-sidebar/admin-card layout into the approved right-rail Japanese paper portal while preserving existing content, search, i18n, theme, and route behavior.

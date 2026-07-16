@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <Transition name="drawer-layer">
+    <Transition name="drawer-layer" :duration="drawerTransitionDurationMs">
       <div v-if="open" class="drawer-layer">
         <button
           type="button"
@@ -70,16 +70,6 @@
             </div>
           </section>
 
-          <button
-            type="button"
-            data-testid="right-nav-close"
-            class="drawer-close"
-            aria-label="Close navigation"
-            @click="emit('close')"
-          >
-            <IconsPaperIcons :open="true" />
-            <span>关闭</span>
-          </button>
         </aside>
       </div>
     </Transition>
@@ -100,16 +90,25 @@ interface Emits {
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
+const DRAWER_TRANSITION_DURATION_MS = 700
+const REDUCED_DRAWER_TRANSITION_DURATION_MS = 1
 
 const localePath = useLocalePath()
 const { locale, t } = useI18n()
 const route = useRoute()
+const prefersReducedMotion = ref(false)
+const drawerTransitionDurationMs = computed(() => prefersReducedMotion.value
+  ? REDUCED_DRAWER_TRANSITION_DURATION_MS
+  : DRAWER_TRANSITION_DURATION_MS)
 const drawerElement = ref<HTMLElement | null>(null)
 const searchToggleElement = ref<HTMLButtonElement | null>(null)
 const searchOpen = ref(false)
 const previouslyFocused = ref<HTMLElement | null>(null)
-let previousBodyOverflow = ''
-let ownsBodyLock = false
+let reducedMotionMediaQuery: MediaQueryList | null = null
+
+function handleReducedMotionChange(event: MediaQueryListEvent): void {
+  prefersReducedMotion.value = event.matches
+}
 
 function localizedLabel(item: PortalNavItem): string {
   if (locale.value.startsWith('ja')) {
@@ -175,27 +174,18 @@ function handleDocumentKeydown(event: KeyboardEvent): void {
   }
 }
 
-function restorePageState(): void {
-  if (!ownsBodyLock) {
-    return
-  }
-
-  document.body.style.overflow = previousBodyOverflow
+function cleanupDrawer(): void {
   document.removeEventListener('keydown', handleDocumentKeydown)
 
   if (previouslyFocused.value?.isConnected) {
     previouslyFocused.value.focus()
   }
   previouslyFocused.value = null
-  ownsBodyLock = false
 }
 
 watch(() => props.open, async (open) => {
   if (open) {
     previouslyFocused.value = document.activeElement instanceof HTMLElement ? document.activeElement : null
-    previousBodyOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    ownsBodyLock = true
     document.addEventListener('keydown', handleDocumentKeydown)
     await nextTick()
     drawerElement.value?.querySelector<HTMLElement>('a[href]')?.focus()
@@ -203,11 +193,18 @@ watch(() => props.open, async (open) => {
   }
 
   searchOpen.value = false
-  restorePageState()
+  cleanupDrawer()
 }, { flush: 'post' })
 
+onMounted(() => {
+  reducedMotionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+  prefersReducedMotion.value = reducedMotionMediaQuery.matches
+  reducedMotionMediaQuery.addEventListener('change', handleReducedMotionChange)
+})
+
 onBeforeUnmount(() => {
-  restorePageState()
+  reducedMotionMediaQuery?.removeEventListener('change', handleReducedMotionChange)
+  cleanupDrawer()
 })
 </script>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="home-page">
-    <SectionsHomeVisual :latest-post="latestPost" :categories="portalCategories" />
+    <SectionsHomeVisual :categories="portalCategories" />
+    <SectionsHomePaperTransition />
 
     <section id="information" class="home-page__information" aria-labelledby="information-heading">
       <DecorPatternDecoration variant="wash" />
@@ -69,8 +70,6 @@ const sortedPosts = computed<readonly ArticleListItem[]>(() => sortArticlesByDat
     cover: post.cover,
   })),
 ))
-
-const latestPost = computed(() => sortedPosts.value[0])
 </script>
 
 <style scoped src="./home-page.css"></style>

@@ -9,11 +9,13 @@
     </div>
 
     <LayoutRightNavDrawer
+      v-if="navigationVisible"
       :open="navOpen"
       :items="portalNavItems"
       @close="closeNavigation"
     />
     <LayoutRightNavRail
+      v-if="navigationVisible"
       :open="navOpen"
       @toggle="toggleNavigation"
       @close="closeNavigation"
@@ -26,7 +28,11 @@
 import { portalNavItems } from '~/data/navigation'
 
 const route = useRoute()
+const localePath = useLocalePath()
+const homeIntroSettled = useState<boolean>('home-intro-settled', () => false)
 const navOpen = ref(false)
+const isHomeRoute = computed(() => route.path === '/' || route.path === localePath('/'))
+const navigationVisible = computed(() => !isHomeRoute.value || homeIntroSettled.value)
 
 function closeNavigation(): void {
   navOpen.value = false
@@ -37,8 +43,19 @@ function toggleNavigation(): void {
 }
 
 watch(() => route.fullPath, () => {
-  navOpen.value = false
-})
+  closeNavigation()
+  if (isHomeRoute.value) {
+    homeIntroSettled.value = false
+  }
+}, { flush: 'sync' })
+
+watch(navigationVisible, (visible) => {
+  if (visible) {
+    return
+  }
+
+  closeNavigation()
+}, { flush: 'sync' })
 </script>
 
 <style scoped>

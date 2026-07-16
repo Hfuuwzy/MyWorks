@@ -4,7 +4,7 @@ These assets are development-preview placeholders for the MyWorks redesign. They
 
 | File | Source | Page Use | Replacement Status |
 |---|---|---|---|
-| `hero-main.png` | `reference/images/文章底片.png` in this repository | Homepage H-01 through H-05 temporary hero artwork | Replace before production素材 readiness |
+| `hero-main.png` | Temporary development-preview asset | Homepage fixed loading layer and normal-flow full-ratio final image | Replace before production素材 readiness |
 | `cover-mysql.jpg` | `https://deaimon.jp/core_sys/images/contents/00000032/block/00000061/00000097.jpg?1661764396` | Temporary MySQL article cover | Replace before production素材 readiness |
 | `cover-ai.jpg` | `https://deaimon.jp/core_sys/images/contents/00000032/block/00000061/00000096.jpg?1661764396` | Temporary AI article cover | Replace before production素材 readiness |
 | `cover-linux.jpg` | `https://deaimon.jp/core_sys/images/contents/00000032/block/00000061/00000127.jpg?1661764396` | Temporary Linux article cover | Replace before production素材 readiness |

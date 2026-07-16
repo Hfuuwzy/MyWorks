@@ -1,7 +1,7 @@
 <template>
   <aside data-testid="right-nav-rail" class="right-nav-rail" aria-label="Site navigation controls">
-    <NuxtLink :to="localePath('/')" data-testid="right-nav-brand" class="rail-brand" aria-label="MyWorks home">
-      <span class="rail-brand__name">MyWorks</span>
+    <NuxtLink :to="localePath('/')" data-testid="right-nav-brand" class="rail-brand" aria-label="Lonelyyang3 home">
+      <span class="rail-brand__name">Lonelyyang3</span>
       <span class="rail-brand__subtitle">和风门户</span>
     </NuxtLink>
 
@@ -19,6 +19,20 @@
         :test-id="open ? 'right-nav-close-icon' : 'right-nav-menu-icon'"
       />
     </button>
+
+    <nav data-testid="right-nav-share-links" class="rail-share" aria-label="Social links">
+      <a
+        class="rail-share__link"
+        href="https://github.com/Hfuuwzy"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub profile"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 18c-4.5 1.5-4.5-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3 0 6.1-1.5 6.1-6.5A5.1 5.1 0 0 0 18.8 4.5 4.7 4.7 0 0 0 18.7 1S17.6.6 15 2.3a13.4 13.4 0 0 0-6 0C6.4.6 5.3 1 5.3 1a4.7 4.7 0 0 0-.1 3.5A5.1 5.1 0 0 0 3.8 8c0 5 3.1 6.5 6.1 6.5a3.4 3.4 0 0 0-.9 2.6V21" />
+        </svg>
+      </a>
+    </nav>
   </aside>
 </template>
 
@@ -56,7 +70,6 @@ function handleMenuClick(): void {
   inline-size: var(--rail-width);
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding-block: 32px 24px;
   border-inline-start: 1px solid var(--rule);
   background-color: var(--nav-paper);
@@ -76,7 +89,7 @@ function handleMenuClick(): void {
 }
 
 .rail-brand__name {
-  font-family: "Noto Serif JP", "Noto Serif SC", "Songti SC", serif;
+  font-family: var(--font-mincho);
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -89,6 +102,8 @@ function handleMenuClick(): void {
 }
 
 .rail-menu {
+  position: absolute;
+  inset-block-start: 50%;
   display: grid;
   inline-size: 48px;
   block-size: 48px;
@@ -98,6 +113,7 @@ function handleMenuClick(): void {
   background: transparent;
   color: var(--ink);
   cursor: pointer;
+  transform: translateY(-50%);
 }
 
 .rail-menu:hover {
@@ -107,9 +123,39 @@ function handleMenuClick(): void {
 }
 
 .rail-menu:focus-visible,
-.rail-brand:focus-visible {
+.rail-brand:focus-visible,
+.rail-share__link:focus-visible {
   outline: 3px solid var(--vermilion);
   outline-offset: 3px;
+}
+
+.rail-share {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block-start: auto;
+}
+
+.rail-share__link {
+  display: grid;
+  inline-size: 44px;
+  block-size: 44px;
+  place-items: center;
+  color: var(--ink-soft);
+}
+
+.rail-share__link:hover {
+  color: var(--vermilion);
+}
+
+.rail-share__link svg {
+  inline-size: 22px;
+  block-size: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
 }
 
 @media (width < 1024px) {
